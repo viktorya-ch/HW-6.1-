@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.rule;
 
 import com.example.demo.model.DTO;
-import com.example.demo.repository.RecommendationRule;
 import com.example.demo.repository.UserProductRepository;
 import org.springframework.stereotype.Component;
 
