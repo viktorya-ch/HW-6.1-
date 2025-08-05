@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.rule;
 
 import com.example.demo.model.DTO;
 
