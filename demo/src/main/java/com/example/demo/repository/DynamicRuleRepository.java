@@ -1,5 +1,6 @@
-package com.example.demo.dynamic;
+package com.example.demo.repository;
 
+import com.example.demo.dynamic.DynamicRule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

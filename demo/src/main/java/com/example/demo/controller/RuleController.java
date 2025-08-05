@@ -1,6 +1,9 @@
-package com.example.demo.dynamic;
+package com.example.demo.controller;
 
 
+import com.example.demo.model.DynamicRuleRequest;
+import com.example.demo.model.DynamicRuleResponse;
+import com.example.demo.model.RuleListResponse;
 import com.example.demo.service.DynamicRuleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

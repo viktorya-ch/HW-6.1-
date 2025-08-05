@@ -1,4 +1,4 @@
-package com.example.demo.dynamic;
+package com.example.demo.model;
 
 import java.util.List;
 

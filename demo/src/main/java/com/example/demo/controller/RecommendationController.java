@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.DTO;
+import com.example.demo.model.RecommendationResponse;
 import com.example.demo.service.RecommendationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

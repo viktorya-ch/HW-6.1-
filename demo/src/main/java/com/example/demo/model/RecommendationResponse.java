@@ -1,6 +1,5 @@
-package com.example.demo.controller;
+package com.example.demo.model;
 
-import com.example.demo.model.DTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

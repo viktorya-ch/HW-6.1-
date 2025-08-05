@@ -14,19 +14,25 @@ import java.util.Optional;
 public class RecommendationService {
 
     private final List<RecommendationRule> rules;
+    private final  DynamicRuleService dynamicRuleService;
+    private final  RuleInterpreter ruleInterpreter;
+
+
+    public List<DTO> getRecommendations(String userId) {
+        List<DTO>recommendations = new ArrayList<>();
+
+        staticRules.forEach(rule -> rule.apply(userId).ifPresent(recommendations::add));
+
+        dynamicRuleService.getAllRules().data().forEach(rule->{
+            if(ruleInterpreter.evaluate(userId,rule.rule())){
+                recommendations.add(new DTO(rule.productId().toString(), rule.productName(),rule.productText()));
+            }
+        });
+        return recommendations;
+    }
 
     @Autowired
     public RecommendationService (List<RecommendationRule> rules){
         this.rules = rules;
-    }
-
-    public List<DTO> getRecommendations (String userId){
-        List<DTO> result = new ArrayList<>();
-        for (RecommendationRule rule : rules){
-            Optional<DTO> recommendation = rule.apply(userId);
-
-            recommendation.ifPresent(result::add);
-        }
-        return result;
     }
 }
