@@ -1,0 +1,22 @@
+package com.example.demo.service;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.User;
+
+import java.util.List;
+
+@Service
+public class UserService {
+    private final JdbcTemplate jdbcTemplate;
+
+    public UserService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<User>findUsersByName(String name){
+        String sql = " SELECT id, name, surname FROM user WHERE CONCAT(name, ' ' , surname) ILIKE ? ";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class),"%" + name + "%");
+    }
+}

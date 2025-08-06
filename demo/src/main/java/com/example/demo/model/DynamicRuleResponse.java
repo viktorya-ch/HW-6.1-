@@ -10,4 +10,6 @@ public record DynamicRuleResponse(
         String productName,
         UUID productId,
         String productText,
-        List<RuleCondition> ruleConditions) {}
+        List<RuleCondition> ruleConditions) {
+
+}
