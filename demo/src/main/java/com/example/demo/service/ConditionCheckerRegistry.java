@@ -8,13 +8,13 @@ import java.util.Map;
 
 @Service
 public class ConditionCheckerRegistry {
-    private final Map<String, ConditionChecker>checkers = new HashMap<>();
+    private final Map<String, ConditionChecker> checkers = new HashMap<>();
 
-    public void register(String queryType, ConditionChecker checker){
+    public void register(String queryType, ConditionChecker checker) {
         checkers.put(queryType, checker);
     }
 
-    public ConditionChecker getChecker(String queryType){
+    public ConditionChecker getChecker(String queryType) {
         return checkers.get(queryType);
     }
 }

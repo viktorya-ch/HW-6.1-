@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface RecommendationRule {
 
-    Optional<DTO>apply(String userId);
+    Optional<DTO> apply(String userId);
 
 
 }

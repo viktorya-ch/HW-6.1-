@@ -17,15 +17,15 @@ public class TelegramBotConfig {
     private String botToken;
 
     @Bean
-    public TelegramBotsApi telegramBotsApi (RecommendationBot recommendationBot)
-        throws TelegramApiException{
+    public TelegramBotsApi telegramBotsApi(RecommendationBot recommendationBot)
+            throws TelegramApiException {
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
         botsApi.registerBot(recommendationBot);
         return botsApi;
     }
 
     @Bean
-    public RecommendationBot recommendationBot(UserService userService, RecommendationService recommendationService){
-        return new RecommendationBot (botToken, userService, recommendationService);
+    public RecommendationBot recommendationBot(UserService userService, RecommendationService recommendationService) {
+        return new RecommendationBot(botToken, userService, recommendationService);
     }
 }

@@ -13,19 +13,19 @@ public class TopSavingRule implements RecommendationRule {
 
     private final UserProductRepository repository;
 
-    public TopSavingRule(UserProductRepository repository){
+    public TopSavingRule(UserProductRepository repository) {
         this.repository = repository;
     }
 
 
     @Override
-    public Optional<DTO>apply(String userId){
+    public Optional<DTO> apply(String userId) {
         boolean usesDebit = repository.isUserUsingProductType(userId, " DEBIT ");
-        if (!usesDebit){
+        if (!usesDebit) {
             return Optional.empty();
         }
 
-        BigDecimal debitDeposits = repository.getTotalDepositForProductType(userId," DEBIT ");
+        BigDecimal debitDeposits = repository.getTotalDepositForProductType(userId, " DEBIT ");
         BigDecimal savingDeposits = repository.getTotalDepositForProductType(userId, " SAVING ");
         BigDecimal fiftyThousand = BigDecimal.valueOf(50_000);
 

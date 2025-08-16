@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-
 import com.example.demo.dynamic.DynamicRule;
 import com.example.demo.model.DTO;
 import com.example.demo.repository.RuleStatisticRepository;
@@ -11,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
+/**
+ * Сервис для генерации персонализированных рекомендаций банковских продуктов.
+ *
+ */
 @Service
 public class RecommendationService {
 
@@ -21,11 +23,14 @@ public class RecommendationService {
         this.statisticRepository = statisticRepository;
     }
 
+    /**
+     * Получает рекомендации для указанного пользователя
+     * @param userId UUID пользователя в строковом формате
+     * @return Список рекомендаций
+     */
     public List<DTO> getRecommendations(String userId) {
         List<DTO> recommendations = new ArrayList<>();
-
         staticRules.forEach(rule -> rule.apply(userId).ifPresent(recommendations::add));
-
         DynamicRuleService dynamicRuleService;
         dynamicRuleService.getAllRules().data().forEach(rule -> {
             if (ruleInterpreter.evaluate(userId, rule.rule())) {
@@ -47,24 +52,4 @@ public class RecommendationService {
         statisticRepository.save(statistic);
 
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

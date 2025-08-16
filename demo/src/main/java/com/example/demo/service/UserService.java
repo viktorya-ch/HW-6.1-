@@ -15,8 +15,8 @@ public class UserService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<User>findUsersByName(String name){
+    public List<User> findUsersByName(String name) {
         String sql = " SELECT id, name, surname FROM user WHERE CONCAT(name, ' ' , surname) ILIKE ? ";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class),"%" + name + "%");
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), "%" + name + "%");
     }
 }

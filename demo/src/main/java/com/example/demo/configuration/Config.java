@@ -30,12 +30,12 @@ public class Config {
 
     @Bean(name = " ")
     @ConfigurationProperties(prefix = " spring.datasource.postgres ")
-    public DataSource postgresDataSource(){
+    public DataSource postgresDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = " ")
-    public LocalContainerEntityManagerFactoryBean dynamicEntityManagerFactory(){
+    public LocalContainerEntityManagerFactoryBean dynamicEntityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
         vendorAdapter.setDatabasePlatform(" org.hibernate.dialect.PostgreSQLDialect ");
@@ -57,7 +57,7 @@ public class Config {
     }
 
     @Bean
-    public PlatformTransactionManager dynamicTransactionManager(){
+    public PlatformTransactionManager dynamicTransactionManager() {
         JpaTransactionManager txManager = new JpaTransactionManager();
 
         txManager.setEntityManagerFactory(dynamicEntityManagerFactory().getObject());

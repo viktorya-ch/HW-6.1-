@@ -13,7 +13,7 @@ public class RuleCondition {
     private UUID id;
 
 
-    private  String query;
+    private String query;
     private String arguments;
 
     private boolean negate;

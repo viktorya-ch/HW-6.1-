@@ -2,7 +2,6 @@ package com.example.demo.dynamic;
 
 
 import com.example.demo.model.RuleCondition;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class DynamicRule {
     private String productText;
 
     @OneToMany(mappedBy = " rule ", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RuleCondition>conditions = new ArrayList<>();
+    private List<RuleCondition> conditions = new ArrayList<>();
 
 
     public DynamicRule(UUID id, String productName, UUID productId, String productText) {
@@ -42,6 +41,10 @@ public class DynamicRule {
         this.productName = productName;
         this.productId = productId;
         this.productText = productText;
+    }
+
+    public DynamicRule() {
+
     }
 
     public UUID getId() {
@@ -95,5 +98,8 @@ public class DynamicRule {
     @Override
     public int hashCode() {
         return Objects.hash(id, productName, productId, productText);
+    }
+
+    public void setConditions(List<com.example.demo.dynamic.RuleCondition> rule) {
     }
 }

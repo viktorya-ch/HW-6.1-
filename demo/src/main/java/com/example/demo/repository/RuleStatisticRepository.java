@@ -8,5 +8,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface RuleStatisticRepository extends JpaRepository<RuleStatistic, UUID> {
-    Optional<RuleStatistic>findByRule(DynamicRule rule);
+    Optional<RuleStatistic> findByRule(DynamicRule rule);
 }

@@ -25,6 +25,7 @@ public class RuleController {
         this.dynamicRuleService = dynamicRuleService;
 
     }
+
     @GetMapping("/stats")
     @ResponseStatus(HttpStatus.OK)
     public RuleStatDTO.RuleStatsResponse getStats() {
@@ -45,7 +46,7 @@ public class RuleController {
 
     @DeleteMapping(" /{id} ")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteRule (@PathVariable UUID id) {
+    public void deleteRule(@PathVariable UUID id) {
         dynamicRuleService.deleteRule(id);
     }
 

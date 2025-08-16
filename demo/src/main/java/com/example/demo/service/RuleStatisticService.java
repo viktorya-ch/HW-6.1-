@@ -6,7 +6,6 @@ import com.example.demo.statistic.RuleStatistic;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RuleStatisticService {
@@ -21,9 +20,9 @@ public class RuleStatisticService {
 
     public RuleStatDTO.RuleStatsResponse getStatistics() {
         List<RuleStatistic> stats = repository.findAll();
-    List<RuleStatDTO> statDTOS = stats.stream().map(stats->new RuleStatDTO(stats.getRule().getId(),stats.getCount())).toList();
-    List<RuleStatDTO>allStats = dynamicRuleService.getAllRules().data().stream().map(rule-> new RuleStatDTO(rule.id(),stats.stream().filter(s->s.setRule().getId().equals(rule.id())).findFirst()
-            .map(RuleStatistic::getCount).orElse(0L))).toList();
-    return new RuleStatDTO.RuleStatsResponse(allStats);
+        List<RuleStatDTO> statDTOS = stats.stream().map(stats -> new RuleStatDTO(stats.getRule().getId(), stats.getCount())).toList();
+        List<RuleStatDTO> allStats = dynamicRuleService.getAllRules().data().stream().map(rule -> new RuleStatDTO(rule.id(), stats.stream().filter(s -> s.setRule().getId().equals(rule.id())).findFirst()
+                .map(RuleStatistic::getCount).orElse(0L))).toList();
+        return new RuleStatDTO.RuleStatsResponse(allStats);
     }
 }
