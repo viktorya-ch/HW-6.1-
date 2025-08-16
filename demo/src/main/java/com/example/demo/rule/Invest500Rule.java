@@ -30,6 +30,4 @@ public class Invest500Rule implements RecommendationRule {
     }
 
 
-
-
 }

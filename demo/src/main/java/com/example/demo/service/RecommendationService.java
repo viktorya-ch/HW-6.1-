@@ -1,38 +1,55 @@
 package com.example.demo.service;
 
-
+import com.example.demo.dynamic.DynamicRule;
 import com.example.demo.model.DTO;
-import com.example.demo.rule.RecommendationRule;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.repository.RuleStatisticRepository;
+import com.example.demo.statistic.RuleStatistic;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
+/**
+ * Сервис для генерации персонализированных рекомендаций банковских продуктов.
+ *
+ */
 @Service
 public class RecommendationService {
 
-    private final List<RecommendationRule> rules;
-    private final  DynamicRuleService dynamicRuleService;
-    private final  RuleInterpreter ruleInterpreter;
+    private final RuleStatisticRepository statisticRepository;
 
+    public RecommendationService(RuleStatisticRepository statisticRepository) {
+        this.statisticRepository = statisticRepository;
+    }
 
+    /**
+     * Получает рекомендации для указанного пользователя
+     * @param userId UUID пользователя в строковом формате
+     * @return Список рекомендаций
+     */
     public List<DTO> getRecommendations(String userId) {
-        List<DTO>recommendations = new ArrayList<>();
-
+        List<DTO> recommendations = new ArrayList<>();
         staticRules.forEach(rule -> rule.apply(userId).ifPresent(recommendations::add));
-
-        dynamicRuleService.getAllRules().data().forEach(rule->{
-            if(ruleInterpreter.evaluate(userId,rule.rule())){
-                recommendations.add(new DTO(rule.productId().toString(), rule.productName(),rule.productText()));
+        DynamicRuleService dynamicRuleService;
+        dynamicRuleService.getAllRules().data().forEach(rule -> {
+            if (ruleInterpreter.evaluate(userId, rule.rule())) {
+                recommendations.add(new DTO(rule.productId().toString(), rule.productName(), rule.productText()));
+                updateRuleStatistic(rule.id());
             }
         });
         return recommendations;
     }
 
-    @Autowired
-    public RecommendationService (List<RecommendationRule> rules){
-        this.rules = rules;
+    private void updateRuleStatistic(UUID ruleId) {
+        DynamicRule rule = dynamicRuleService.getRuleById(ruleId).orElseThrow(() -> new IllegalArgumentException(" Rule not found "));
+        RuleStatistic statistic = statisticRepository.findByRule(rule).orElseGet(() -> {
+            RuleStatistic newStat = new RuleStatistic();
+            newStat.setRule(rule);
+            return newStat;
+        });
+        statistic.setCount(statistic.getCount() + 1);
+        statisticRepository.save(statistic);
+
     }
 }

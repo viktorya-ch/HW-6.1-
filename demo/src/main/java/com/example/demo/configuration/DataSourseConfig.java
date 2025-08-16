@@ -15,23 +15,23 @@ import javax.sql.DataSource;
 public class DataSourseConfig {
     @Bean(name = " h2DataSourse ")
     @ConfigurationProperties(prefix = " spring.datasourse.h2 ")
-    public DataSource h2DataSourse(){
+    public DataSource h2DataSourse() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = " pgDataSourse ")
     @ConfigurationProperties(prefix = " spring.datasourse.postgres ")
-    public DataSource pgDataSourse(){
+    public DataSource pgDataSourse() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    public JdbcTemplate h2JdbcTemplate(@Qualifier(" h2DataSource ")DataSource dataSource){
+    public JdbcTemplate h2JdbcTemplate(@Qualifier(" h2DataSource ") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(" pgDataSource ") DataSource dataSource){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier(" pgDataSource ") DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan(" com.example.demo.dynamic ");

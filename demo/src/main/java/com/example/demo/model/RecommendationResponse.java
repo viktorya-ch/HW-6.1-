@@ -7,13 +7,13 @@ import java.util.List;
 public class RecommendationResponse {
     @JsonProperty(" user_id ")
     private String userId;
-            @JsonProperty (" recommendations ")
+    @JsonProperty(" recommendations ")
     private List<DTO> recommendations;
 
-            public RecommendationResponse (String userId, List<DTO>recommendations){
-                this.userId = userId;
-                this.recommendations = recommendations;
-            }
+    public RecommendationResponse(String userId, List<DTO> recommendations) {
+        this.userId = userId;
+        this.recommendations = recommendations;
+    }
 
     public String getUserId() {
         return userId;
